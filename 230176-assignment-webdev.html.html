@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Personal Webpage - Đoàn Nguyễn Hân Thịnh</title>
+        <meta
+            name="description"
+            content="Personal webpage + Notebook (CS104 Assignment 2)"
+        />
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 0;
+                padding: 20px;
+            }
+            header img {
+                display: block;
+                margin: 0 auto 10px auto;
+            }
+            main {
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: left;
+            }
+            footer {
+                text-align: center;
+                margin-top: 20px;
+                font-size: 0.9em;
+                color: #555;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <img
+                src="./avatar.jpg"
+                alt="Professional photo"
+                style="
+                    width: 150px;
+                    height: 150px;
+                    object-fit: cover;
+                    border-radius: 8px;
+                    display: block;
+                    margin-bottom: 8px;
+                "
+            />
+            <h1>Đoàn Nguyễn Hân Thịnh</h1>
+            <p>Student | Fulbright University Vietnam</p>
+            <nav>
+                <a href="#about">About</a> |
+                <a href="#portfolio">Portfolio</a> |
+                <a href="#notebook">Notebook</a> |
+                <a href="#contact">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="about">
+                <h2>About</h2>
+                <p>
+                    Hello! My name is Đoàn Nguyễn Hân Thịnh, and I’m currently a third-year
+                    student at Fulbright University Vietnam, majoring in Vietnam
+                    Studies. I have a deep interest in
+                    <strong>History</strong> and
+                    <strong>Political Economy</strong>, which drive my academic
+                    and research pursuits.
+                </p>
+                <p>
+                    My main skill is critical analysis and writing — I enjoy
+                    connecting historical insights with modern socio-economic
+                    contexts through essays and research projects. Outside of
+                    academics, I love <strong>running</strong> and
+                    <strong>watching anime</strong> as ways to relax and find
+                    inspiration.
+                </p>
+            </section>
+
+            <section id="portfolio">
+                <h2>Portfolio</h2>
+                <ul>
+                    <li>
+                        <strong
+                            >Project 1: Geopolitical Conflicts on the Mekong
+                            River</strong
+                        >
+                        — This research explores the geopolitical risks caused
+                        by excessive hydroelectric exploitation by China, Laos,
+                        and Myanmar along the Mekong River. It examines how such
+                        developments impact regional stability and the
+                        livelihoods of downstream countries, including Vietnam,
+                        Cambodia, and Thailand.
+                    </li>
+                    <li>
+                        <strong
+                            >Project 2: Population and Agricultural Development
+                            in the Mekong Delta during the Nguyễn Dynasty and
+                            French Colonial Period</strong
+                        >
+                        — A personal study analyzing the influence of artificial
+                        drainage canals built during these two periods. By
+                        comparing demographic and agricultural growth data, the
+                        project highlights how canal systems shaped the region’s
+                        development historically.
+                    </li>
+                </ul>
+            </section>
+
+            <section id="notebook">
+                <h2>Notebook</h2>
+                <p>
+                    Type your note below and click <strong>Add Note</strong>.
+                    Notes exist only during the current browser session.
+                </p>
+
+                <label for="noteInput">New Note:</label><br />
+                <textarea
+                    id="noteInput"
+                    rows="4"
+                    cols="50"
+                    placeholder="Write your note here..."
+                ></textarea
+                ><br />
+                <button id="addNoteBtn">Add Note</button>
+                <div id="noteMsg"></div>
+
+                <h3>All Notes</h3>
+                <div id="notesContainer"></div>
+            </section>
+
+            <section id="contact">
+                <h2>Contact</h2>
+                <form
+                    onsubmit="event.preventDefault();alert('Simulated submission from: ' + document.getElementById('msgName').value);"
+                >
+                    <label for="msgName">Name:</label><br />
+                    <input id="msgName" type="text" /><br />
+
+                    <label for="msgEmail">Email:</label><br />
+                    <input id="msgEmail" type="email" /><br />
+
+                    <label for="msgText">Message:</label><br />
+                    <textarea id="msgText" rows="4" cols="50"></textarea><br />
+
+                    <button type="submit">Send (Simulated)</button>
+                </form>
+            </section>
+        </main>
+
+        <script>
+            (function () {
+                const addBtn = document.getElementById("addNoteBtn");
+                const noteInput = document.getElementById("noteInput");
+                const notesContainer =
+                    document.getElementById("notesContainer");
+                const noteMsg = document.getElementById("noteMsg");
+
+                function showMessage(text, isError) {
+                    noteMsg.textContent = text;
+                    noteMsg.style.color = isError ? "red" : "green";
+                    setTimeout(() => {
+                        if (noteMsg.textContent === text)
+                            noteMsg.textContent = "";
+                    }, 3000);
+                }
+
+                function createNoteElement(text) {
+                    const div = document.createElement("div");
+                    div.textContent =
+                        text + " (" + new Date().toLocaleString() + ")";
+                    return div;
+                }
+
+                addBtn.addEventListener("click", function () {
+                    const text = noteInput.value.trim();
+                    if (!text) {
+                        showMessage("Please enter a note.", true);
+                        return;
+                    }
+                    const noteEl = createNoteElement(text);
+                    notesContainer.prepend(noteEl);
+                    noteInput.value = "";
+                    showMessage("Note added successfully.", false);
+                });
+            })();
+        </script>
+    </body>
+</html>
